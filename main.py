@@ -9,10 +9,20 @@ load_dotenv()
 root = tk.Tk()
 root.withdraw() 
 
+try:
     arquivo = filedialog.askopenfilename(
         title="Selecione um arquivo MP3",
         filetypes=[("Arquivos MP3", "*.mp3")]
     )
+except Exception as erro:
+    print(f"Erro no processamento: {erro}")
+finally:
+    root.destroy()
+
+if not arquivo:
+    print("Nenhum arquivo selecionado.")
+    raise SystemExit
+
 modelo = w.load_model("base")
 transcript = modelo.transcribe(arquivo)
 
