@@ -2,10 +2,19 @@ import os
 from dotenv import load_dotenv
 import whisper as w
 from google import genai
+import tkinter as tk
+from tkinter import filedialog
 load_dotenv()
 
+root = tk.Tk()
+root.withdraw() 
+
+    arquivo = filedialog.askopenfilename(
+        title="Selecione um arquivo MP3",
+        filetypes=[("Arquivos MP3", "*.mp3")]
+    )
 modelo = w.load_model("base")
-transcript = modelo.transcribe("teste.mp3")
+transcript = modelo.transcribe(arquivo)
 
 client = genai.Client(api_key=os.getenv('API_KEY'))
 
