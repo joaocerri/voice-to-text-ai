@@ -39,6 +39,7 @@ try:
     )
 
     print(response.text)
-except:
-    print(f"Erro no processamento do modelo...")
+except Exception as erro:
+    print(f"Erro no processamento do modelo: {erro}")
+
 
